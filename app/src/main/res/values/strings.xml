@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Android Assignment</string>
-    <string name="number_invalid">Please enter a valid number greater than 0 and less than </string>
-    <string name="number_range">Index should be greater than 0 and less than </string>
+    <string name="invalid_number">Please enter a valid number</string>
 </resources>

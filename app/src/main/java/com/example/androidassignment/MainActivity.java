@@ -7,11 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.androidassignment.Suffixer;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -26,19 +27,30 @@ public class MainActivity extends AppCompatActivity {
             String index = indexSuffixInput.getText().toString();
             int indexNumber;
 
+
             try {
-                indexNumber = Integer.parseInt(index);
-                if(indexNumber < 0 || indexNumber > text.length()-1) {
-                    throw new Exception();
+                if (text.length() == 0) {
+                    throw new Exception("Please enter a string that is at least 1 character long");
                 }
-            }
-            catch(NumberFormatException e) {
-                out.setText(R.string.number_invalid + (text.length()-1));
+
+                indexNumber = Integer.parseInt(index);
+                if (indexNumber < 0 || indexNumber > text.length() - 1) {
+                    throw new Exception("Index should be greater than 0 and smaller than " + (text.length()-1));
+                }
+            } catch (NumberFormatException e) {
+                out.setText(R.string.invalid_number);
+                return;
+            } catch (Exception e) {
+                out.setText(e.getMessage());
                 return;
             }
-            catch (Exception e) {
-                out.setText ( R.string.number_range +(text.length()-1));
-                return;
+
+            Suffixer suffix = new Suffixer(text, indexNumber);
+            try {
+                out.setText("Suffix is: " + suffix.getSuffix());
+            }
+            catch(Exception e) {
+                out.setText(e.getMessage());
             }
         });
 
