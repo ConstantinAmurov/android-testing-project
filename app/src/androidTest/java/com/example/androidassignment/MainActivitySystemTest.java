@@ -55,7 +55,7 @@ public class MainActivitySystemTest {
 
 //        Second test
         inputIndex.perform(click());
-        inputIndex.perform(replaceText("test"), closeSoftKeyboard());
+        inputIndex.perform(replaceText("invalidIndex"), closeSoftKeyboard());
         button.perform(click());
         output.check(matches(withText(R.string.invalid_number)));
 
