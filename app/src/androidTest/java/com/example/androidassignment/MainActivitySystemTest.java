@@ -31,20 +31,20 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class MainActivitySystemTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void mainActivityTest() {
-//       First test
 
         ViewInteraction inputText = onView(withId(R.id.input1));
         ViewInteraction inputIndex = onView(withId(R.id.input2));
         ViewInteraction button = onView(withId(R.id.button));
         ViewInteraction output = onView(withId(R.id.out));
 
+//       First test
         inputText.perform(click());
         inputText.perform(replaceText("test"), closeSoftKeyboard());
         inputIndex.perform(click());
@@ -52,6 +52,18 @@ public class MainActivityTest {
         button.perform(click());
 
         output.check(matches(withText("Suffix is: t")));
+
+//        Second test
+        inputIndex.perform(click());
+        inputIndex.perform(replaceText("test"), closeSoftKeyboard());
+        button.perform(click());
+        output.check(matches(withText(R.string.invalid_number)));
+
+//        Third test
+        inputIndex.perform(click());
+        inputIndex.perform(replaceText("7"), closeSoftKeyboard());
+        button.perform(click());
+        output.check(matches(withText("Index should be greater than 0 and smaller than 3")));
 
     }
 

@@ -25,14 +25,11 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(view -> {
             String text = textInput.getText().toString();
             String index = indexSuffixInput.getText().toString();
-            int indexNumber;
-
 
             try {
                 if (text.length() == 0) {
                     throw new Exception("Please enter a string that is at least 1 character long");
                 }
-                indexNumber = Integer.parseInt(index);
             } catch (NumberFormatException e) {
                 out.setText(R.string.invalid_number);
                 return;
@@ -41,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            Suffixer suffix = new Suffixer(text, indexNumber);
+            Suffixer suffix = new Suffixer(text, index);
             try {
                 out.setText("Suffix is: " + suffix.getSuffix());
             }
