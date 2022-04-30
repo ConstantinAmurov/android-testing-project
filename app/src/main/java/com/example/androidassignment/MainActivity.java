@@ -29,15 +29,15 @@ public class MainActivity extends AppCompatActivity {
             try {
                 indexNumber = Integer.parseInt(index);
                 if(indexNumber < 0 || indexNumber > text.length()-1) {
-                    throw new Exception("Index should be greater than 0 and less than " + (text.length()-1));
+                    throw new Exception();
                 }
             }
             catch(NumberFormatException e) {
-                out.setText(e.getMessage());
+                out.setText(R.string.number_invalid + (text.length()-1));
                 return;
             }
             catch (Exception e) {
-                out.setText(e.getMessage());
+                out.setText ( R.string.number_range +(text.length()-1));
                 return;
             }
         });
