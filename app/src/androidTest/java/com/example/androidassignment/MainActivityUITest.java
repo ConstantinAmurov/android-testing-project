@@ -40,26 +40,53 @@ public class MainActivityUITest {
         ViewInteraction button = onView(withId(R.id.button));
         ViewInteraction output = onView(withId(R.id.out));
 
-//       First test
+
+
+////       First test
+        String validText = "test";
+        String validIndex = "3";
+        Suffixer validSuffix = new Suffixer(validText,validIndex);
+
         inputText.perform(click());
-        inputText.perform(replaceText("test"), closeSoftKeyboard());
+        inputText.perform(replaceText(validText), closeSoftKeyboard());
         inputIndex.perform(click());
-        inputIndex.perform(replaceText("3"), closeSoftKeyboard());
+        inputIndex.perform(replaceText(validIndex.toString()), closeSoftKeyboard());
         button.perform(click());
 
-        output.check(matches(withText("Suffix is: t")));
+        try{
+            String validResult = validSuffix.getSuffix();
+            output.check(matches(withText("Suffix is: "+ validResult)));
+        } catch (Exception e) {
+            output.check(matches(withText(e.getMessage())));
+        }
 
 //        Second test
-        inputIndex.perform(click());
-        inputIndex.perform(replaceText("invalidString"), closeSoftKeyboard());
-        button.perform(click());
-        output.check(matches(withText(R.string.invalid_number)));
+        String invalidIndex = "invalidIndex";
+        Suffixer invalidSuffix = new Suffixer(validText,invalidIndex);
 
-//        Third test
         inputIndex.perform(click());
-        inputIndex.perform(replaceText("7"), closeSoftKeyboard());
+        inputIndex.perform(replaceText(invalidIndex), closeSoftKeyboard());
         button.perform(click());
-        output.check(matches(withText("Index should be greater than 0 and smaller than 3")));
+        try{
+            String invalidResult = invalidSuffix.getSuffix();
+        } catch (Exception e) {
+            output.check(matches(withText(R.string.invalid_number)));
+        }
+//
+////        Third test
+        String greaterIndex = "7";
+        invalidSuffix = new Suffixer(validText,greaterIndex);
+
+        inputIndex.perform(click());
+        inputIndex.perform(replaceText(greaterIndex), closeSoftKeyboard());
+        button.perform(click());
+
+        try{
+            String invalidResult = invalidSuffix.getSuffix();
+
+        } catch (Exception e) {
+            output.check(matches(withText("Index should be greater than 0 and smaller than 3")));
+        }
 
     }
 
