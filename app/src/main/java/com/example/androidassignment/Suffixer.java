@@ -10,9 +10,12 @@ public class Suffixer {
         this.index = index;
     }
 
-    public String getSuffix ()
-    {
+    public String getSuffix () throws Exception {
         try {
+            if (this.index < 0 || this.index > text.length() - 1) {
+                throw new Exception("Index should be greater than 0 and smaller than " + (text.length()-1));
+            }
+
             String result = this.text.substring(this.index);
             return result;
         }

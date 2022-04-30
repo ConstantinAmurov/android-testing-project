@@ -32,11 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 if (text.length() == 0) {
                     throw new Exception("Please enter a string that is at least 1 character long");
                 }
-
                 indexNumber = Integer.parseInt(index);
-                if (indexNumber < 0 || indexNumber > text.length() - 1) {
-                    throw new Exception("Index should be greater than 0 and smaller than " + (text.length()-1));
-                }
             } catch (NumberFormatException e) {
                 out.setText(R.string.invalid_number);
                 return;
